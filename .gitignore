@@ -8,5 +8,6 @@ ebin/*.beam
 rel/example_project
 .concrete/DEV_MODE
 .rebar
-emqx-streaming.d
-ebin/*.beam
+emqx_streaming.d
+ebin/*
+erlang.mk
