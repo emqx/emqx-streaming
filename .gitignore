@@ -11,3 +11,7 @@ rel/example_project
 emqx_streaming.d
 ebin/*
 erlang.mk
+.erlang.mk/
+ct.coverdata
+logs/
+test/ct.cover.spec

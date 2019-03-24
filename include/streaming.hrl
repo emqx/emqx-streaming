@@ -12,16 +12,14 @@
 %% See the License for the specific language governing permissions and
 %% limitations under the License.
 
--module(emqx_streaming_app).
+-type(window() :: term()).
 
--behaviour(application).
-
--export([start/2]).
--export([stop/1]).
-
-start(_Type, _Args) ->
-	emqx_streaming_sup:start_link().
-
-stop(_State) ->
-	ok.
+-record(stream,
+        { id :: binary()
+        , name :: binary()
+        , rawsql :: binary()
+        , window :: window()
+        , enabled :: boolean()
+        , description :: binary()
+        }).
 

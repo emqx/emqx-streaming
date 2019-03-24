@@ -12,29 +12,29 @@
 %% See the License for the specific language governing permissions and
 %% limitations under the License.
 
--module(emqx_streaming_sup).
+-module(emqx_streaming_actor_sup).
 
 -behaviour(supervisor).
 
+%% API
 -export([start_link/0]).
 
+%% Supervisor callbacks
 -export([init/1]).
 
 start_link() ->
-	supervisor:start_link({local, ?MODULE}, ?MODULE, []).
+    supervisor:start_link({local, ?MODULE}, ?MODULE, []).
+
+%%------------------------------------------------------------------------------
+%% Supervisor callbacks
+%%------------------------------------------------------------------------------
 
 init([]) ->
-    Runtime = #{id => emqx_stream_runtime,
-                start => {emqx_stream_runtime, start_link, []},
-                restart => permanent,
-                shutdown => 5000,
-                type => worker,
-                modules => [emqx_stream_runtime]},
-    ActorSup = #{id => emqx_stream_actor_sup,
-                start => {emqx_stream_actor_sup, start_link, []},
-                restart => transient,
-                shutdown => infinity,
-                type => supervisor,
-                modules => [emqx_stream_actor_sup]},
-    {ok, {{one_for_all, 10, 100}, [Runtime, ActorSup]}}.
+    Actor = #{id => streaming_actor,
+              start => {emqx_streaming_actor, start_link, []},
+              restart => transient,
+              shutdown => 1000,
+              type => worker,
+              modules => [emqx_streaming_actor]},
+    {ok, {{simple_one_for_one, 100, 3600}, [Actor]}}.
 
