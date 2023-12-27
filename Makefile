@@ -1,5 +1,5 @@
 PROJECT = emqx_streaming
-PROJECT_DESCRIPTION = EMQ X Streaming
+PROJECT_DESCRIPTION = EMQX Streaming
 PROJECT_VERSION = 0.1.0
 
 NO_AUTOPATCH = cuttlefish

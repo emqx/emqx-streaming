@@ -1,7 +1,7 @@
 
 # emqx-streaming
 
-IoT Data Streaming for EMQ X Broker
+IoT Data Streaming for EMQX Broker
 
 ## Architecture
 
